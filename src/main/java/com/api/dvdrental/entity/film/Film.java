@@ -31,17 +31,18 @@ public class Film {
     @Column(name = "release_year")
     private String releaseYear;
 
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinTable(
             name = "film_category",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<Category> category;
+    private Category category;
 
-    @JoinColumn(name = "language_id")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Language> language;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Language language;
 
     @Column(name = "rental_duration")
     private Integer rentalDuration;
@@ -61,7 +62,12 @@ public class Film {
     @Column(name = "full_text")
     private String fullText;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "film", fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Actor> actor;
 
 
