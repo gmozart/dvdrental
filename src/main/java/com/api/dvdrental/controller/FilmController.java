@@ -1,7 +1,9 @@
 package com.api.dvdrental.controller;
 
-import com.api.dvdrental.dto.ActorDTO;
+
 import com.api.dvdrental.dto.FilmDTO;
+import com.api.dvdrental.entity.actor.Actor;
+import com.api.dvdrental.entity.film.Film;
 import com.api.dvdrental.service.FilmService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -42,17 +44,17 @@ public class FilmController {
 
 
     @GetMapping("/actor/film/{id}")
-    public ResponseEntity<List<ActorDTO>> queryActorFilmId(@PathVariable Long id){
+    public ResponseEntity<List<Actor>> queryActorFilmId(@PathVariable Long id){
         return ResponseEntity.ok(filmService.queryActorFilm(id));
     }
 
     @GetMapping("/language/film/{id}")
-    public ResponseEntity<List<FilmDTO>> queryLanguageFilmId(@PathVariable Long id){
+    public ResponseEntity<Film> queryLanguageFilmId(@PathVariable Long id){
         return ResponseEntity.ok(filmService.queryLanguageFilm(id));
     }
 
     @GetMapping("/category/film/{id}")
-    public ResponseEntity<List<FilmDTO>> queryFilmCategoryId(@PathVariable Long id){
+    public ResponseEntity<List<Film>> queryFilmCategoryId(@PathVariable Long id){
         return ResponseEntity.ok(filmService.queryFilmCategory(id));
     }
 

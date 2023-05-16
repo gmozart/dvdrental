@@ -1,13 +1,9 @@
 package com.api.dvdrental.entity.film;
 
-import com.api.dvdrental.dto.ActorDTO;
-import com.api.dvdrental.dto.CategoryDTO;
-import com.api.dvdrental.dto.FilmDTO;
-import com.api.dvdrental.dto.LanguageDTO;
+
 import com.api.dvdrental.entity.actor.Actor;
 import com.api.dvdrental.entity.category.Category;
 import com.api.dvdrental.entity.language.Language;
-import com.api.dvdrental.entity.language.LanguageRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +20,13 @@ public class FilmImpl{
 
 
 
-    public List<FilmDTO> queryFilmCategory(Long id){
+    public List<Film> queryFilmCategory(Long id){
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
-        Root<FilmDTO> film = query.from(FilmDTO.class);
+        CriteriaQuery<Film> query = cb.createQuery(Film.class);
+        Root<Film> film = query.from(Film.class);
 
-        Join<FilmDTO, CategoryDTO> filmCategory = film.join("category", JoinType.INNER);
+        Join<Film, Category> filmCategory = film.join("category", JoinType.INNER);
         filmCategory.on(cb.equal(filmCategory.get("categoryId"), id));
 
         return entityManager.createQuery(query).getResultList();
@@ -38,25 +34,25 @@ public class FilmImpl{
     }
 
 
-     public FilmDTO queryLanguageFilm(Long id) {
+     public Film queryLanguageFilm(Long id) {
 
          CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-         CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
-         Root<FilmDTO> film = query.from(FilmDTO.class);
+         CriteriaQuery<Film> query = cb.createQuery(Film.class);
+         Root<Film> film = query.from(Film.class);
 
-         Join<FilmDTO, LanguageDTO> filmLanguage = film.join("language", JoinType.INNER);
+         Join<Film, Language> filmLanguage = film.join("language", JoinType.INNER);
          filmLanguage.on(cb.equal(film.get("filmId"), id));
 
          return entityManager.createQuery(query).getSingleResult();
      }
 
-     public List<ActorDTO> queryActorFilm(Long id){
+     public List<Actor> queryActorFilm(Long id){
 
          CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-         CriteriaQuery<ActorDTO> query = cb.createQuery(ActorDTO.class);
-         Root<ActorDTO> Actor = query.from(ActorDTO.class);
+         CriteriaQuery<Actor> query = cb.createQuery(Actor.class);
+         Root<Actor> actor = query.from(Actor.class);
 
-         Join<ActorDTO, FilmDTO> filmActor = Actor.join("film", JoinType.INNER);
+         Join<Actor, Film> filmActor = actor.join("film", JoinType.INNER);
          filmActor.on(cb.equal(filmActor.get("filmId"), id));
 
          return entityManager.createQuery(query).getResultList();

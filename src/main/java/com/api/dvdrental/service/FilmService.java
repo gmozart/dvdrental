@@ -1,8 +1,10 @@
 package com.api.dvdrental.service;
 
 
-import com.api.dvdrental.dto.ActorDTO;
+
 import com.api.dvdrental.dto.FilmDTO;
+import com.api.dvdrental.entity.actor.Actor;
+import com.api.dvdrental.entity.film.Film;
 import com.api.dvdrental.entity.film.FilmImpl;
 import com.api.dvdrental.entity.film.FilmRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,15 +40,15 @@ public class FilmService {
     }
 
 
-    public List<FilmDTO> queryFilmCategory(Long id){
+    public List<Film> queryFilmCategory(Long id){
         return filmImpl.queryFilmCategory(id);
     }
 
-    public List<FilmDTO> queryLanguageFilm(Long id){
-        return filmImpl.queryFilmCategory(id);
+    public Film queryLanguageFilm(Long id){
+        return filmImpl.queryLanguageFilm(id);
     }
 
-    public List<ActorDTO> queryActorFilm(Long Id){
+    public List<Actor> queryActorFilm(Long Id){
         return filmImpl.queryActorFilm(Id);
     }
 
