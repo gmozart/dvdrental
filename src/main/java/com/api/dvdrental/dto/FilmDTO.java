@@ -23,8 +23,7 @@ public class FilmDTO {
     private String title;
     private String description;
     private String releaseYear;
-    private Set<Category> category;
-    private Set<Language> language;
+    private Language language;
     private Integer rentalDuration;
     private Long rentalRate;
     private Long length;
@@ -42,7 +41,6 @@ public class FilmDTO {
                 .title(film.getTitle())
                 .description(film.getDescription())
                 .releaseYear(film.getReleaseYear())
-                .category(film.getCategory())
                 .language(film.getLanguage())
                 .rentalDuration(film.getRentalDuration())
                 .rentalRate(film.getRentalRate())
@@ -62,7 +60,6 @@ public class FilmDTO {
                 .title(filmDTO.getTitle())
                 .description(filmDTO.getDescription())
                 .releaseYear(filmDTO.getReleaseYear())
-                .category(filmDTO.getCategory())
                 .language(filmDTO.getLanguage())
                 .rentalDuration(filmDTO.getRentalDuration())
                 .rentalRate(filmDTO.getRentalRate())

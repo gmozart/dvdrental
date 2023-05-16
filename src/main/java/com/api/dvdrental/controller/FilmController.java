@@ -29,18 +29,19 @@ public class FilmController {
         return ResponseEntity.created(uri).body(filmDTO);
     }
 
-    @PutMapping("/{id}")
+    @RequestMapping(method = RequestMethod.HEAD)
     @Transactional
     public ResponseEntity<FilmDTO> update(@PathVariable Long id, @RequestBody FilmDTO filmDTO){
         return ResponseEntity.ok(filmService.update(id,filmDTO).get());
     }
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<FilmDTO> delete (@PathVariable Long id){
-        filmService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+    //[NÃO PERMITIDO, CAUSA -> tabela de inventory\\
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public ResponseEntity<FilmDTO> delete (@PathVariable Long id){
+//        filmService.delete(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
 
     @GetMapping("/actor/film/{id}")

@@ -20,7 +20,7 @@ public class FilmImpl{
 
 
 
-    public List<Film> queryFilmCategory(Long id){
+    public List<Film> queryFilmCategory(Long id){ //Funcionando
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Film> query = cb.createQuery(Film.class);
@@ -34,28 +34,30 @@ public class FilmImpl{
     }
 
 
-     public Film queryLanguageFilm(Long id) {
+     public Film queryLanguageFilm(Long id) { //Não está funcionando
+
+         CriteriaBuilder criteriaBuilder  = entityManager.getCriteriaBuilder();
+         CriteriaQuery<Film> query = criteriaBuilder.createQuery(Film.class);
+         Root<Film> film = query.from(Film.class);
+
+         Join<Film, Language> filmLanguage = film.join("language", JoinType.INNER);
+         filmLanguage.on(criteriaBuilder.equal(film.get("filmId"), id));
+
+         return entityManager.createQuery(query).getSingleResult();
+     }
+
+     public List<Film> queryActorFilm(Long id){ //Não está funcionando
 
          CriteriaBuilder cb = entityManager.getCriteriaBuilder();
          CriteriaQuery<Film> query = cb.createQuery(Film.class);
          Root<Film> film = query.from(Film.class);
 
-         Join<Film, Language> filmLanguage = film.join("language", JoinType.INNER);
-         filmLanguage.on(cb.equal(film.get("filmId"), id));
-
-         return entityManager.createQuery(query).getSingleResult();
-     }
-
-     public List<Actor> queryActorFilm(Long id){
-
-         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-         CriteriaQuery<Actor> query = cb.createQuery(Actor.class);
-         Root<Actor> actor = query.from(Actor.class);
-
-         Join<Actor, Film> filmActor = actor.join("film", JoinType.INNER);
+         Join<Film, Actor> filmActor = film.join("film", JoinType.INNER);
          filmActor.on(cb.equal(filmActor.get("filmId"), id));
 
          return entityManager.createQuery(query).getResultList();
      }
+
+
 
 }
