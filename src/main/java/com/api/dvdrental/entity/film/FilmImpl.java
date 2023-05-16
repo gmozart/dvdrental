@@ -22,10 +22,11 @@ public class FilmImpl{
 
     private final EntityManager entityManager;
 
-    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
 
     public List<FilmDTO> queryFilmCategory(Long id){
 
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
         Root<FilmDTO> film = query.from(FilmDTO.class);
 
@@ -39,6 +40,7 @@ public class FilmImpl{
 
      public FilmDTO queryLanguageFilm(Long id) {
 
+         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
          CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
          Root<FilmDTO> film = query.from(FilmDTO.class);
 
@@ -50,6 +52,7 @@ public class FilmImpl{
 
      public List<ActorDTO> queryActorFilm(Long id){
 
+         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
          CriteriaQuery<ActorDTO> query = cb.createQuery(ActorDTO.class);
          Root<ActorDTO> Actor = query.from(ActorDTO.class);
 
