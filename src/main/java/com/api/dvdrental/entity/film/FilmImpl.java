@@ -1,5 +1,9 @@
 package com.api.dvdrental.entity.film;
 
+import com.api.dvdrental.dto.ActorDTO;
+import com.api.dvdrental.dto.CategoryDTO;
+import com.api.dvdrental.dto.FilmDTO;
+import com.api.dvdrental.dto.LanguageDTO;
 import com.api.dvdrental.entity.actor.Actor;
 import com.api.dvdrental.entity.category.Category;
 import com.api.dvdrental.entity.language.Language;
@@ -20,12 +24,12 @@ public class FilmImpl{
 
     CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 
-    public List<Film> queryFilmCategory(Long id){
+    public List<FilmDTO> queryFilmCategory(Long id){
 
-        CriteriaQuery<Film> query = cb.createQuery(Film.class);
-        Root<Film> film = query.from(Film.class);
+        CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
+        Root<FilmDTO> film = query.from(FilmDTO.class);
 
-        Join<Film, Category> filmCategory = film.join("category", JoinType.INNER);
+        Join<FilmDTO, CategoryDTO> filmCategory = film.join("category", JoinType.INNER);
         filmCategory.on(cb.equal(filmCategory.get("categoryId"), id));
 
         return entityManager.createQuery(query).getResultList();
@@ -33,23 +37,23 @@ public class FilmImpl{
     }
 
 
-     public Film queryLanguageFilm(Long id) {
+     public FilmDTO queryLanguageFilm(Long id) {
 
-         CriteriaQuery<Film> query = cb.createQuery(Film.class);
-         Root<Film> film = query.from(Film.class);
+         CriteriaQuery<FilmDTO> query = cb.createQuery(FilmDTO.class);
+         Root<FilmDTO> film = query.from(FilmDTO.class);
 
-         Join<Film, Language> filmLanguage = film.join("language", JoinType.INNER);
+         Join<FilmDTO, LanguageDTO> filmLanguage = film.join("language", JoinType.INNER);
          filmLanguage.on(cb.equal(film.get("filmId"), id));
 
          return entityManager.createQuery(query).getSingleResult();
      }
 
-     public List<Actor> queryActorFilm(Long id){
+     public List<ActorDTO> queryActorFilm(Long id){
 
-         CriteriaQuery<Actor> query = cb.createQuery(Actor.class);
-         Root<Actor> Actor = query.from(Actor.class);
+         CriteriaQuery<ActorDTO> query = cb.createQuery(ActorDTO.class);
+         Root<ActorDTO> Actor = query.from(ActorDTO.class);
 
-         Join<Actor, Film> filmActor = Actor.join("film", JoinType.INNER);
+         Join<ActorDTO, FilmDTO> filmActor = Actor.join("film", JoinType.INNER);
          filmActor.on(cb.equal(filmActor.get("filmId"), id));
 
          return entityManager.createQuery(query).getResultList();
