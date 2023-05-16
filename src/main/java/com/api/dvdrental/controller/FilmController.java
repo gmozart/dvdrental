@@ -45,7 +45,7 @@ public class FilmController {
 
 
     @GetMapping("/actor/film/{id}")
-    public ResponseEntity<List<Actor>> queryActorFilmId(@PathVariable Long id){
+    public ResponseEntity<List<Film>> queryActorFilmId(@PathVariable Long id){
         return ResponseEntity.ok(filmService.queryActorFilm(id));
     }
 

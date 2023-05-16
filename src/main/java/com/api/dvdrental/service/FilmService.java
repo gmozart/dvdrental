@@ -3,7 +3,6 @@ package com.api.dvdrental.service;
 
 
 import com.api.dvdrental.dto.FilmDTO;
-import com.api.dvdrental.entity.actor.Actor;
 import com.api.dvdrental.entity.film.Film;
 import com.api.dvdrental.entity.film.FilmImpl;
 import com.api.dvdrental.entity.film.FilmRepository;
@@ -48,7 +47,7 @@ public class FilmService {
         return filmImpl.queryLanguageFilm(id);
     }
 
-    public List<Actor> queryActorFilm(Long Id){
+    public List<Film> queryActorFilm(Long Id){
         return filmImpl.queryActorFilm(Id);
     }
 
