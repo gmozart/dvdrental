@@ -28,6 +28,7 @@ public class Film {
     private String title;
     @Column(name = "description")
     private String description;
+
     @Column(name = "release_year")
     private String releaseYear;
 
@@ -41,7 +42,8 @@ public class Film {
     )
     private Category category;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "language_id")
     private Language language;
 
     @Column(name = "rental_duration")
@@ -49,16 +51,23 @@ public class Film {
 
     @Column(name = "rental_rate")
     private Long rentalRate;
+
     @Column(name = "length")
     private Long length;
+
     @Column(name = "replacement_cost")
     private Long replacementCost;
+
     @Column(name = "rating")
-    private String rating;
+    @Enumerated(EnumType.ORDINAL)
+    private Rating rating;
+
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
-    @Column(name = "special_features")
-    private String specialFeatures;
+
+    @Column(nullable = false, columnDefinition = "text[]")
+    private String[] specialFeatures;
+
     @Column(name = "full_text")
     private String fullText;
 
@@ -68,7 +77,7 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
     @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Actor> actor;
+    private List<Actor> actor;
 
 
 

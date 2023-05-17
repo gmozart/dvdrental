@@ -1,11 +1,11 @@
 package com.api.dvdrental.service;
 
-
-
 import com.api.dvdrental.dto.FilmDTO;
+import com.api.dvdrental.entity.actor.Actor;
 import com.api.dvdrental.entity.film.Film;
 import com.api.dvdrental.entity.film.FilmImpl;
 import com.api.dvdrental.entity.film.FilmRepository;
+import com.api.dvdrental.entity.language.Language;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +21,8 @@ public class FilmService {
     private final FilmImpl filmImpl;
 
 
-    public void save(FilmDTO filmDTO){
-        filmRepository.save(FilmDTO.of(filmDTO));
+    public FilmDTO save(FilmDTO filmDTO){
+        return  FilmDTO.of(filmRepository.save(FilmDTO.of(filmDTO)));
     }
 
     public Optional<List<FilmDTO>> findAll(){
@@ -39,16 +39,17 @@ public class FilmService {
     }
 
 
-    public List<Film> queryFilmCategory(Long id){
-        return filmImpl.queryFilmCategory(id);
+    public List<Film> getFilmByCategory(Long id){
+
+        return filmImpl.getFilmByCategory(id);
     }
 
-    public Film queryLanguageFilm(Long id){
-        return filmImpl.queryLanguageFilm(id);
+    public Language getLanguageByFilm(Long id){
+        return filmImpl.getLanguageByFilm(id);
     }
 
-    public List<Film> queryActorFilm(Long Id){
-        return filmImpl.queryActorFilm(Id);
+    public List<Actor> getActorByFilm(Long Id){
+        return filmImpl.getActorByFilm(Id);
     }
 
 }

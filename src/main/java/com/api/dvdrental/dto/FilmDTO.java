@@ -3,7 +3,10 @@ package com.api.dvdrental.dto;
 import com.api.dvdrental.entity.actor.Actor;
 import com.api.dvdrental.entity.category.Category;
 import com.api.dvdrental.entity.film.Film;
+import com.api.dvdrental.entity.film.Rating;
 import com.api.dvdrental.entity.language.Language;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -21,18 +24,33 @@ public class FilmDTO {
 
     private Long filmId;
     private String title;
+    @JsonIgnore
     private String description;
+    @JsonIgnore
     private String releaseYear;
+
+    @JsonIgnoreProperties({"lastUpdate"})
     private Language language;
+
     private Integer rentalDuration;
     private Long rentalRate;
+    @JsonIgnore
     private Long length;
+
     private Long replacementCost;
-    private String rating;
+
+    private Rating rating;
+
+    @JsonIgnore
     private LocalDateTime lastUpdate;
-    private String specialFeatures;
+    @JsonIgnore
+    @Column(nullable = false, columnDefinition = "text[]")
+    private String[] specialFeatures;
+    @JsonIgnore
     private String fullText;
-    private Set<Actor> actor;
+
+    @JsonIgnoreProperties({"lastUpdate"})
+    private List<Actor> actor;
 
 
     public static FilmDTO of(Film film){
