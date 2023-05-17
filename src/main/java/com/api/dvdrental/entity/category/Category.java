@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 public class Category {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long categoryId;
 
     private String name;

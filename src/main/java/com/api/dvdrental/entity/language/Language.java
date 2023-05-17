@@ -22,6 +22,6 @@ public class Language {
 
     private String name;
 
-    private LocalDateTime lastUpdate;
+    private LocalDateTime lastUpdate = LocalDateTime.now();;
 
 }

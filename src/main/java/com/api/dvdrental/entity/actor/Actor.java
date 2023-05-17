@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class Actor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long actorId;
 
     private String firstName;

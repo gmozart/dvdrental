@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
+
 
 @Data
 @AllArgsConstructor
@@ -22,6 +22,7 @@ import java.util.Set;
 public class Film {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long filmId;
 
     @Column(name = "title")

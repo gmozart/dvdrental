@@ -84,7 +84,7 @@ public class FilmDTO {
                 .length(filmDTO.getLength())
                 .replacementCost(filmDTO.getReplacementCost())
                 .rating(filmDTO.getRating())
-                .lastUpdate(filmDTO.getLastUpdate())
+                .lastUpdate(filmDTO.lastUpdate = LocalDateTime.now())
                 .specialFeatures(filmDTO.getSpecialFeatures())
                 .fullText(filmDTO.getFullText())
                 .actor(filmDTO.getActor())

@@ -1,6 +1,7 @@
 package com.api.dvdrental.dto;
 
 import com.api.dvdrental.entity.category.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,8 +14,10 @@ import java.util.stream.Collectors;
 @Builder
 public class CategoryDTO {
 
+    @JsonIgnore
     private Long categoryId;
     private String name;
+    @JsonIgnore
     private LocalDateTime lastUpdate;
 
     public static CategoryDTO of(Category category){
@@ -29,7 +32,7 @@ public class CategoryDTO {
         return Category.builder()
                 .categoryId(categoryDTO.getCategoryId())
                 .name(categoryDTO.getName())
-                .lastUpdate(categoryDTO.getLastUpdate())
+                .lastUpdate(categoryDTO.lastUpdate = LocalDateTime.now())
                 .build();
     }
 

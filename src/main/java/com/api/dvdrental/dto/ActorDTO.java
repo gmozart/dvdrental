@@ -1,6 +1,7 @@
 package com.api.dvdrental.dto;
 
 import com.api.dvdrental.entity.actor.Actor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class ActorDTO {
 
     private String lastName;
 
+    @JsonIgnore
     private LocalDateTime lastUpdate;
 
 
@@ -35,7 +37,7 @@ public class ActorDTO {
                 .actorId(actorDTO.getActorId())
                 .firstName(actorDTO.getFirstName())
                 .lastName(actorDTO.getLastName())
-                .lastUpdate(actorDTO.getLastUpdate())
+                .lastUpdate(actorDTO.lastUpdate = LocalDateTime.now())
                 .build();
     }
 

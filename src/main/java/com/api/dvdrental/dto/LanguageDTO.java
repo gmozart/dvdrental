@@ -1,6 +1,7 @@
 package com.api.dvdrental.dto;
 
 import com.api.dvdrental.entity.language.Language;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class LanguageDTO {
 
     private Long languageId;
     private String name;
+    @JsonIgnore
     private LocalDateTime lastUpdate;
 
     public static LanguageDTO of(Language language){
@@ -30,7 +32,7 @@ public class LanguageDTO {
         return Language.builder()
                 .languageId(languageDTO.getLanguageId())
                 .name(languageDTO.getName())
-                .lastUpdate(languageDTO.getLastUpdate())
+                .lastUpdate(languageDTO.lastUpdate = LocalDateTime.now())
                 .build();
     }
 
